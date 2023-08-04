@@ -6,9 +6,9 @@ import com.thoughtworks.profileexercise.repository.InMemoryRepository;
 public class ColorLogicUserProfileService implements UserProfileService {
 
     public static final String NOT_SPECIFIED_MESSAGE = "Not Specified";
-    private final InMemoryRepository inMemoryRepository;
+    private final InMemoryRepository<UserProfile> inMemoryRepository;
 
-    public ColorLogicUserProfileService(InMemoryRepository inMemoryRepository) {
+    public ColorLogicUserProfileService(InMemoryRepository<UserProfile> inMemoryRepository) {
 
         this.inMemoryRepository = inMemoryRepository;
     }
