@@ -67,6 +67,16 @@ public class UserProfileControllerTest {
     }
 
     @Test
+    void shouldHandleResultIfUserProfileNotCreated() {
+        service.stubCreateResponse(false);
+        var expected = ResponseEntity.internalServerError().build();
+
+        var actual = controller.createProfile(expectedProfile);
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
     void shouldNotCreateAUserProfileIfUsernameIsMissing() {
         expectedProfile.setUsername(null);
         var expected = ResponseEntity.badRequest().build();
@@ -128,11 +138,16 @@ public class UserProfileControllerTest {
 
     protected static class StubbedUserProfileService implements UserProfileService {
 
+        private boolean createResponse = true;
+
         @Override
         public boolean createUserProfile(UserProfile profile) {
-            return true;
+            return createResponse;
         }
 
+        public void stubCreateResponse(boolean cannedResponse) {
+            createResponse = cannedResponse;
+        }
     }
 
 }

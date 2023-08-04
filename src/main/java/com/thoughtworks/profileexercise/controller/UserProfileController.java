@@ -36,7 +36,7 @@ public class UserProfileController {
         if (createWasSuccessful) {
             return ResponseEntity.ok().build();
         } else {
-            return null;
+            return ResponseEntity.internalServerError().build();
         }
     }
 }
