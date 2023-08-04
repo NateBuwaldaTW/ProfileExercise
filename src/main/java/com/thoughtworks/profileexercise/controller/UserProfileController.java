@@ -3,7 +3,6 @@ package com.thoughtworks.profileexercise.controller;
 import com.thoughtworks.profileexercise.service.UserProfileService;
 import org.springframework.http.ResponseEntity;
 
-import java.util.Collections;
 import java.util.List;
 
 public class UserProfileController {

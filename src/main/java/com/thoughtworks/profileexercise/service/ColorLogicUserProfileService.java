@@ -5,6 +5,7 @@ import com.thoughtworks.profileexercise.controller.UserProfile;
 import com.thoughtworks.profileexercise.repository.InMemoryRepository;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ColorLogicUserProfileService implements UserProfileService {
 
@@ -27,7 +28,14 @@ public class ColorLogicUserProfileService implements UserProfileService {
 
     @Override
     public List<SimplifiedProfile> fetchAllSimplifiedProfiles() {
-        return null;
+        List<UserProfile> userProfiles = inMemoryRepository.fetchAll();
+        return userProfiles.stream().map(profile -> {
+           var simplified = new SimplifiedProfile();
+           simplified.setId(profile.getId().toString());
+           simplified.setUsername(profile.getUsername());
+
+           return simplified;
+        }).collect(Collectors.toList());
     }
 
     private UserProfile checkFavoriteColor(UserProfile originalProfile) {
