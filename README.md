@@ -15,7 +15,8 @@ Instructions for the Profile Exercise
    * GET all profiles that returns a collection of UUIDs and usernames
    * GET one profile by UUID that returns all of the fields of one user profile
      * Attempting to get a profile by key that does not exist should return a 'Not Found'
-   * POST one new profile that requires all fields to be provided
+   * POST one new profile that requires all fields except for 'Favorite Color' to be provided
      * Not having all of the required fields should return a 'Bad Request'
+     * Not providing a 'Favorite Color' should set the stored value to 'Not Specified'
 6. The API should be written using a test-first TDD process.
 7. The code should be organized in a typical controller -> service -> repository tiered structure.
