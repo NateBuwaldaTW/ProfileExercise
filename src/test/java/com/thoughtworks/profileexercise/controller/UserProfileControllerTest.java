@@ -8,11 +8,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.ResponseEntity;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 
 public class UserProfileControllerTest {
 
+    private final int testStringSize = 10;
     private UserProfileController controller;
     private StubbedUserProfileService service;
     private UserProfile expectedProfile;
@@ -23,11 +26,11 @@ public class UserProfileControllerTest {
         controller = new UserProfileController(service);
 
         expectedProfile = new UserProfile();
-        expectedProfile.setUsername(RandomStringUtils.random(10));
-        expectedProfile.setFirstName(RandomStringUtils.random(10));
-        expectedProfile.setLastName(RandomStringUtils.random(10));
-        expectedProfile.setCity(RandomStringUtils.random(10));
-        expectedProfile.setStateProvince(RandomStringUtils.random(10));
+        expectedProfile.setUsername(RandomStringUtils.random(testStringSize));
+        expectedProfile.setFirstName(RandomStringUtils.random(testStringSize));
+        expectedProfile.setLastName(RandomStringUtils.random(testStringSize));
+        expectedProfile.setCity(RandomStringUtils.random(testStringSize));
+        expectedProfile.setStateProvince(RandomStringUtils.random(testStringSize));
         expectedProfile.setAge(RandomUtils.nextInt());
 
     }
@@ -49,7 +52,15 @@ public class UserProfileControllerTest {
 
     @Test
     void shouldGetAllUserProfiles() {
-        List<UserProfile> expectedProfiles = Collections.emptyList();
+        var expectedSimplifiedProfile = new SimplifiedProfile();
+        expectedSimplifiedProfile.setId(UUID.randomUUID().toString());
+        expectedSimplifiedProfile.setUsername(RandomStringUtils.random(testStringSize));
+
+        List<SimplifiedProfile> expectedProfiles = new ArrayList<>();
+        expectedProfiles.add(expectedSimplifiedProfile);
+
+        service.stubSimplifiedProfiles(expectedProfiles);
+
         var expected = ResponseEntity.ok(expectedProfiles);
 
         var actual = controller.getAllProfiles();
@@ -139,14 +150,24 @@ public class UserProfileControllerTest {
     protected static class StubbedUserProfileService implements UserProfileService {
 
         private boolean createResponse = true;
+        private List<SimplifiedProfile> simplifiedProfilesResponse;
 
         @Override
         public boolean createUserProfile(UserProfile profile) {
             return createResponse;
         }
 
+        @Override
+        public List<SimplifiedProfile> fetchAllSimplifiedProfiles() {
+            return simplifiedProfilesResponse;
+        }
+
         public void stubCreateResponse(boolean cannedResponse) {
             createResponse = cannedResponse;
+        }
+
+        public void stubSimplifiedProfiles(List<SimplifiedProfile> simplifiedProfiles) {
+            simplifiedProfilesResponse = simplifiedProfiles;
         }
     }
 

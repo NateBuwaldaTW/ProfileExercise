@@ -1,7 +1,10 @@
 package com.thoughtworks.profileexercise.service;
 
+import com.thoughtworks.profileexercise.controller.SimplifiedProfile;
 import com.thoughtworks.profileexercise.controller.UserProfile;
 import com.thoughtworks.profileexercise.repository.InMemoryRepository;
+
+import java.util.List;
 
 public class ColorLogicUserProfileService implements UserProfileService {
 
@@ -20,6 +23,11 @@ public class ColorLogicUserProfileService implements UserProfileService {
         }
 
         return false;
+    }
+
+    @Override
+    public List<SimplifiedProfile> fetchAllSimplifiedProfiles() {
+        return null;
     }
 
     private UserProfile checkFavoriteColor(UserProfile originalProfile) {

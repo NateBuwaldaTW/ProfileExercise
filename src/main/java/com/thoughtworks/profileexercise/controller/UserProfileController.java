@@ -18,8 +18,8 @@ public class UserProfileController {
         return ResponseEntity.ok(new UserProfile());
     }
 
-    public ResponseEntity<List<UserProfile>> getAllProfiles() {
-        return ResponseEntity.ok(Collections.emptyList());
+    public ResponseEntity<List<SimplifiedProfile>> getAllProfiles() {
+        return ResponseEntity.ok(service.fetchAllSimplifiedProfiles());
     }
 
     public ResponseEntity<Object> createProfile(UserProfile profile) {
