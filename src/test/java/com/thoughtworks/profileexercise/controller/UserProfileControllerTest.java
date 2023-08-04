@@ -21,6 +21,7 @@ public class UserProfileControllerTest {
         expectedProfile = new UserProfile();
         expectedProfile.setUsername(RandomStringUtils.random(10));
         expectedProfile.setFirstName(RandomStringUtils.random(10));
+        expectedProfile.setLastName(RandomStringUtils.random(10));
     }
 
     @Test
@@ -70,6 +71,16 @@ public class UserProfileControllerTest {
     @Test
     void shouldNotCreateAUserProfileIfFirstNameIsMissing() {
         expectedProfile.setFirstName(null);
+        var expected = ResponseEntity.badRequest().build();
+
+        var actual = controller.createProfile(expectedProfile);
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    void shouldNotCreateAUserProfileIfLastNameIsMissing() {
+        expectedProfile.setLastName(null);
         var expected = ResponseEntity.badRequest().build();
 
         var actual = controller.createProfile(expectedProfile);
