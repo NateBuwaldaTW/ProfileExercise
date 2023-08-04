@@ -42,7 +42,7 @@ public class UserProfileServiceTest {
         var actual = service.createUserProfile(expectedProfile);
         Assertions.assertTrue(actual);
 
-        var actualSavedProfiles = stubRepository.fetchResults();
+        var actualSavedProfiles = stubRepository.fetchAll();
         int expectedProfileSavedCount = 1;
         Assertions.assertEquals(expectedProfileSavedCount, actualSavedProfiles.size());
         Assertions.assertEquals(expectedProfile, actualSavedProfiles.get(0));
@@ -55,24 +55,25 @@ public class UserProfileServiceTest {
         var actual = service.createUserProfile(expectedProfile);
         Assertions.assertTrue(actual);
 
-        var actualSavedProfiles = stubRepository.fetchResults();
+        var actualSavedProfiles = stubRepository.fetchAll();
         int expectedProfileSavedCount = 1;
         Assertions.assertEquals(expectedProfileSavedCount, actualSavedProfiles.size());
         Assertions.assertEquals(UserProfileService.NOT_SPECIFIED_MESSAGE, actualSavedProfiles.get(0).getFavoriteColor());
     }
 
-    protected static class StubbedInMemoryRepository implements InMemoryRepository {
+    protected static class StubbedInMemoryRepository implements InMemoryRepository<UserProfile> {
 
         private final List<UserProfile> results = new ArrayList<>();
-
-        protected List<UserProfile> fetchResults() {
-            return results;
-        }
 
         @Override
         public boolean save(UserProfile profile) {
             results.add(profile);
             return true;
+        }
+
+        @Override
+        public List<UserProfile> fetchAll() {
+            return results;
         }
     }
 
