@@ -1,5 +1,6 @@
 package com.thoughtworks.profileexercise.controller;
 
+import com.thoughtworks.profileexercise.service.UserProfileService;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.RandomUtils;
 import org.junit.jupiter.api.Assertions;
@@ -13,11 +14,13 @@ import java.util.List;
 public class UserProfileControllerTest {
 
     private UserProfileController controller;
+    private StubbedUserProfileService service;
     private UserProfile expectedProfile;
 
     @BeforeEach
     void setUp() {
-        controller = new UserProfileController();
+        service = new StubbedUserProfileService();
+        controller = new UserProfileController(service);
 
         expectedProfile = new UserProfile();
         expectedProfile.setUsername(RandomStringUtils.random(10));
@@ -121,6 +124,15 @@ public class UserProfileControllerTest {
         var actual = controller.createProfile(expectedProfile);
 
         Assertions.assertEquals(expected, actual);
+    }
+
+    protected static class StubbedUserProfileService implements UserProfileService {
+
+        @Override
+        public boolean createUserProfile(UserProfile profile) {
+            return true;
+        }
+
     }
 
 }
