@@ -16,7 +16,8 @@ public class UserProfileController {
     }
 
     public ResponseEntity<Object> createProfile(UserProfile profile) {
-        if (profile.getUsername() == null) {
+        if (profile.getUsername() == null
+                || profile.getFirstName() == null) {
             return ResponseEntity.badRequest().build();
         }
 

@@ -12,10 +12,15 @@ import java.util.List;
 public class UserProfileControllerTest {
 
     private UserProfileController controller;
+    private UserProfile expectedProfile;
 
     @BeforeEach
     void setUp() {
         controller = new UserProfileController();
+
+        expectedProfile = new UserProfile();
+        expectedProfile.setUsername(RandomStringUtils.random(10));
+        expectedProfile.setFirstName(RandomStringUtils.random(10));
     }
 
     @Test
@@ -45,8 +50,6 @@ public class UserProfileControllerTest {
 
     @Test
     void shouldCreateAUserProfile() {
-        var expectedProfile = new UserProfile();
-        expectedProfile.setUsername(RandomStringUtils.random(10));
         var expected = ResponseEntity.ok().build();
 
         var actual = controller.createProfile(expectedProfile);
@@ -56,7 +59,17 @@ public class UserProfileControllerTest {
 
     @Test
     void shouldNotCreateAUserProfileIfUsernameIsMissing() {
-        var expectedProfile = new UserProfile();
+        expectedProfile.setUsername(null);
+        var expected = ResponseEntity.badRequest().build();
+
+        var actual = controller.createProfile(expectedProfile);
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    void shouldNotCreateAUserProfileIfFirstNameIsMissing() {
+        expectedProfile.setFirstName(null);
         var expected = ResponseEntity.badRequest().build();
 
         var actual = controller.createProfile(expectedProfile);
