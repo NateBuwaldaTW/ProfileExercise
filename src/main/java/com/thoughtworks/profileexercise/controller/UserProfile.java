@@ -10,6 +10,22 @@ public class UserProfile {
     private String city;
     private String stateProvince;
     private Integer age;
+    private String favoriteColor;
+
+    public UserProfile() {
+        super();
+    }
+
+    public UserProfile(UserProfile profileToCopy) {
+        super();
+        this.setAge(profileToCopy.getAge());
+        this.setFirstName(profileToCopy.getFirstName());
+        this.setLastName(profileToCopy.getLastName());
+        this.setCity(profileToCopy.getCity());
+        this.setStateProvince(profileToCopy.getStateProvince());
+        this.setUsername(profileToCopy.getUsername());
+        this.setFavoriteColor(profileToCopy.getFavoriteColor());
+    }
 
     public String getUsername() {
         return username;
@@ -51,24 +67,32 @@ public class UserProfile {
         return stateProvince;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        UserProfile that = (UserProfile) o;
-        return Objects.equals(username, that.username) && Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName) && Objects.equals(city, that.city) && Objects.equals(stateProvince, that.stateProvince) && Objects.equals(age, that.age);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(username, firstName, lastName, city, stateProvince, age);
-    }
-
     public void setAge(Integer age) {
         this.age = age;
     }
 
     public Integer getAge() {
         return age;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserProfile that = (UserProfile) o;
+        return Objects.equals(username, that.username) && Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName) && Objects.equals(city, that.city) && Objects.equals(stateProvince, that.stateProvince) && Objects.equals(age, that.age) && Objects.equals(favoriteColor, that.favoriteColor);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(username, firstName, lastName, city, stateProvince, age, favoriteColor);
+    }
+
+    public void setFavoriteColor(String favoriteColor) {
+        this.favoriteColor = favoriteColor;
+    }
+
+    public String getFavoriteColor() {
+        return favoriteColor;
     }
 }

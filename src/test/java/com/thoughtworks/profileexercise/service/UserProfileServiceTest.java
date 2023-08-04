@@ -7,10 +7,11 @@ import org.junit.jupiter.api.Test;
 import repository.InMemoryRepository;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class UserProfileServiceTest {
+
+    private final String expectedFavoriteColor = "Green";
 
     private UserProfileService service;
     private UserProfile expectedProfile;
@@ -20,7 +21,9 @@ public class UserProfileServiceTest {
     void setUp() {
         stubRepository = new StubbedInMemoryRepository();
         service = new UserProfileService(stubRepository);
+
         expectedProfile = new UserProfile();
+        expectedProfile.setFavoriteColor(expectedFavoriteColor);
     }
 
     @Test
@@ -44,6 +47,19 @@ public class UserProfileServiceTest {
         int expectedProfileSavedCount = 1;
         Assertions.assertEquals(expectedProfileSavedCount, actualSavedProfiles.size());
         Assertions.assertEquals(expectedProfile, actualSavedProfiles.get(0));
+    }
+
+    @Test
+    void shouldHandleUserProfileWithoutColor() {
+        expectedProfile.setFavoriteColor(null);
+
+        var actual = service.createUserProfile(expectedProfile);
+        Assertions.assertTrue(actual);
+
+        var actualSavedProfiles = stubRepository.fetchResults();
+        int expectedProfileSavedCount = 1;
+        Assertions.assertEquals(expectedProfileSavedCount, actualSavedProfiles.size());
+        Assertions.assertEquals(UserProfileService.NOT_SPECIFIED_MESSAGE, actualSavedProfiles.get(0).getFavoriteColor());
     }
 
     protected class StubbedInMemoryRepository implements InMemoryRepository {
