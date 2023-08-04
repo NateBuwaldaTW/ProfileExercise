@@ -14,4 +14,8 @@ public class UserProfileController {
     public ResponseEntity<List<UserProfile>> getAllProfiles() {
         return ResponseEntity.ok(Collections.emptyList());
     }
+
+    public ResponseEntity<Object> createProfile() {
+        return ResponseEntity.ok().build();
+    }
 }

@@ -42,4 +42,13 @@ public class UserProfileControllerTest {
         Assertions.assertEquals(expected, actual);
     }
 
+    @Test
+    void shouldCreateAUserProfile() {
+        var expected = ResponseEntity.ok().build();
+
+        var actual = controller.createProfile();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
 }
