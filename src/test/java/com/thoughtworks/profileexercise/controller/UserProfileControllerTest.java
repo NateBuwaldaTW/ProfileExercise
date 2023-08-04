@@ -23,6 +23,7 @@ public class UserProfileControllerTest {
         expectedProfile.setFirstName(RandomStringUtils.random(10));
         expectedProfile.setLastName(RandomStringUtils.random(10));
         expectedProfile.setCity(RandomStringUtils.random(10));
+        expectedProfile.setStateProvince(RandomStringUtils.random(10));
     }
 
     @Test
@@ -92,6 +93,16 @@ public class UserProfileControllerTest {
     @Test
     void shouldNotCreateAUserProfileIfCityIsMissing() {
         expectedProfile.setCity(null);
+        var expected = ResponseEntity.badRequest().build();
+
+        var actual = controller.createProfile(expectedProfile);
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    void shouldNotCreateAUserProfileIfStateProvinceIsMissing() {
+        expectedProfile.setStateProvince(null);
         var expected = ResponseEntity.badRequest().build();
 
         var actual = controller.createProfile(expectedProfile);

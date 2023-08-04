@@ -19,7 +19,8 @@ public class UserProfileController {
         if (profile.getUsername() == null
                 || profile.getFirstName() == null
                 || profile.getLastName() == null
-                || profile.getCity() == null) {
+                || profile.getCity() == null
+                || profile.getStateProvince() == null) {
             return ResponseEntity.badRequest().build();
         }
 
