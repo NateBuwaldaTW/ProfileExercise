@@ -3,13 +3,13 @@ Instructions for the Profile Exercise
 1. Create a new Github repository called 'ProfileExercise'
 2. Create a new Spring Web project.  This project can use either Gradle or Maven as a build tool.
 3. We will be creating a REST API that retrieves and adds a new user profile.  The profile will contain the following information:
-   * Username
-   * First Name
-   * Last Name
-   * City
-   * State or Province
-   * Age
-   * Favorite Color
+   * Username (string)
+   * First Name (string)
+   * Last Name (string)
+   * City (string)
+   * State or Province (string)
+   * Age (integer)
+   * Favorite Color (string)
 4. The user profile information will be stored in an in-memory map datastore that is keyed by a UUID.
 5. The following API endpoints are required:
    * GET all profiles that returns a collection of UUIDs and usernames
