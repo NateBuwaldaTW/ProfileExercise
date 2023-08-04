@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 public class UserProfileControllerTest {
 
@@ -26,7 +25,7 @@ public class UserProfileControllerTest {
         expectedProfile.setLastName(RandomStringUtils.random(10));
         expectedProfile.setCity(RandomStringUtils.random(10));
         expectedProfile.setStateProvince(RandomStringUtils.random(10));
-        expectedProfile.setAge((Integer) RandomUtils.nextInt());
+        expectedProfile.setAge(RandomUtils.nextInt());
 
     }
 
