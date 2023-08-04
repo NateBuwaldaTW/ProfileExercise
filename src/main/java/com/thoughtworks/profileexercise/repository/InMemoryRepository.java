@@ -1,4 +1,4 @@
-package repository;
+package com.thoughtworks.profileexercise.repository;
 
 import com.thoughtworks.profileexercise.controller.UserProfile;
 

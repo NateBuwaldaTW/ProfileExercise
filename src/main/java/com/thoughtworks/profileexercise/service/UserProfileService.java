@@ -1,7 +1,7 @@
 package com.thoughtworks.profileexercise.service;
 
 import com.thoughtworks.profileexercise.controller.UserProfile;
-import repository.InMemoryRepository;
+import com.thoughtworks.profileexercise.repository.InMemoryRepository;
 
 public class UserProfileService {
 

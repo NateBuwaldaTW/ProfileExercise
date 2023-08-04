@@ -4,7 +4,7 @@ import com.thoughtworks.profileexercise.controller.UserProfile;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import repository.InMemoryRepository;
+import com.thoughtworks.profileexercise.repository.InMemoryRepository;
 
 import java.util.ArrayList;
 import java.util.List;
