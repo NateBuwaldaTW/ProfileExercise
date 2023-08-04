@@ -11,8 +11,6 @@ import java.util.List;
 
 public class UserProfileServiceTest {
 
-    private final String expectedFavoriteColor = "Green";
-
     private UserProfileService service;
     private UserProfile expectedProfile;
     private StubbedInMemoryRepository stubRepository;
@@ -23,6 +21,7 @@ public class UserProfileServiceTest {
         service = new UserProfileService(stubRepository);
 
         expectedProfile = new UserProfile();
+        String expectedFavoriteColor = "Green";
         expectedProfile.setFavoriteColor(expectedFavoriteColor);
     }
 
@@ -62,7 +61,7 @@ public class UserProfileServiceTest {
         Assertions.assertEquals(UserProfileService.NOT_SPECIFIED_MESSAGE, actualSavedProfiles.get(0).getFavoriteColor());
     }
 
-    protected class StubbedInMemoryRepository implements InMemoryRepository {
+    protected static class StubbedInMemoryRepository implements InMemoryRepository {
 
         private final List<UserProfile> results = new ArrayList<>();
 
