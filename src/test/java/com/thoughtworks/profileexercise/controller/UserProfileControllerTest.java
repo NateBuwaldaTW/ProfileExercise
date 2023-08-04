@@ -5,6 +5,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.ResponseEntity;
 
+import java.util.Collections;
+import java.util.List;
+
 public class UserProfileControllerTest {
 
     private UserProfileController controller;
@@ -25,6 +28,16 @@ public class UserProfileControllerTest {
         var expected = ResponseEntity.ok(expectedProfile);
 
         var actual = controller.getUserProfile();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    void shouldGetAllUserProfiles() {
+        List<UserProfile> expectedProfiles = Collections.emptyList();
+        var expected = ResponseEntity.ok(expectedProfiles);
+
+        var actual = controller.getAllProfiles();
 
         Assertions.assertEquals(expected, actual);
     }
