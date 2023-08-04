@@ -9,16 +9,16 @@ import com.thoughtworks.profileexercise.repository.InMemoryRepository;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserProfileServiceTest {
+public class ColorLogicUserProfileServiceTest {
 
-    private UserProfileService service;
+    private ColorLogicUserProfileService service;
     private UserProfile expectedProfile;
     private StubbedInMemoryRepository stubRepository;
 
     @BeforeEach
     void setUp() {
         stubRepository = new StubbedInMemoryRepository();
-        service = new UserProfileService(stubRepository);
+        service = new ColorLogicUserProfileService(stubRepository);
 
         expectedProfile = new UserProfile();
         String expectedFavoriteColor = "Green";
@@ -58,7 +58,7 @@ public class UserProfileServiceTest {
         var actualSavedProfiles = stubRepository.fetchAll();
         int expectedProfileSavedCount = 1;
         Assertions.assertEquals(expectedProfileSavedCount, actualSavedProfiles.size());
-        Assertions.assertEquals(UserProfileService.NOT_SPECIFIED_MESSAGE, actualSavedProfiles.get(0).getFavoriteColor());
+        Assertions.assertEquals(ColorLogicUserProfileService.NOT_SPECIFIED_MESSAGE, actualSavedProfiles.get(0).getFavoriteColor());
     }
 
     protected static class StubbedInMemoryRepository implements InMemoryRepository<UserProfile> {

@@ -20,6 +20,7 @@ public class UserProfile {
 
     public UserProfile(UserProfile profileToCopy) {
         super();
+        this.setId(profileToCopy.getId());
         this.setAge(profileToCopy.getAge());
         this.setFirstName(profileToCopy.getFirstName());
         this.setLastName(profileToCopy.getLastName());
