@@ -1,6 +1,7 @@
 package com.thoughtworks.profileexercise.controller;
 
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.RandomUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -8,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 public class UserProfileControllerTest {
 
@@ -24,6 +26,8 @@ public class UserProfileControllerTest {
         expectedProfile.setLastName(RandomStringUtils.random(10));
         expectedProfile.setCity(RandomStringUtils.random(10));
         expectedProfile.setStateProvince(RandomStringUtils.random(10));
+        expectedProfile.setAge((Integer) RandomUtils.nextInt());
+
     }
 
     @Test
@@ -103,6 +107,16 @@ public class UserProfileControllerTest {
     @Test
     void shouldNotCreateAUserProfileIfStateProvinceIsMissing() {
         expectedProfile.setStateProvince(null);
+        var expected = ResponseEntity.badRequest().build();
+
+        var actual = controller.createProfile(expectedProfile);
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    void shouldNotCreateAUserProfileIfAgeIsMissing() {
+        expectedProfile.setAge(null);
         var expected = ResponseEntity.badRequest().build();
 
         var actual = controller.createProfile(expectedProfile);

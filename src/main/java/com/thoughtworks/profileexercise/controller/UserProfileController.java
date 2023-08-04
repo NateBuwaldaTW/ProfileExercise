@@ -20,7 +20,8 @@ public class UserProfileController {
                 || profile.getFirstName() == null
                 || profile.getLastName() == null
                 || profile.getCity() == null
-                || profile.getStateProvince() == null) {
+                || profile.getStateProvince() == null
+                || profile.getAge() == null) {
             return ResponseEntity.badRequest().build();
         }
 

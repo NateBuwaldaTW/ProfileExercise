@@ -9,6 +9,7 @@ public class UserProfile {
     private String lastName;
     private String city;
     private String stateProvince;
+    private Integer age;
 
     public String getUsername() {
         return username;
@@ -42,24 +43,32 @@ public class UserProfile {
         return city;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        UserProfile that = (UserProfile) o;
-        return Objects.equals(username, that.username) && Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName) && Objects.equals(city, that.city) && Objects.equals(stateProvince, that.stateProvince);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(username, firstName, lastName, city, stateProvince);
-    }
-
     public void setStateProvince(String stateProvince) {
         this.stateProvince = stateProvince;
     }
 
     public String getStateProvince() {
         return stateProvince;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserProfile that = (UserProfile) o;
+        return Objects.equals(username, that.username) && Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName) && Objects.equals(city, that.city) && Objects.equals(stateProvince, that.stateProvince) && Objects.equals(age, that.age);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(username, firstName, lastName, city, stateProvince, age);
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+    public Integer getAge() {
+        return age;
     }
 }
