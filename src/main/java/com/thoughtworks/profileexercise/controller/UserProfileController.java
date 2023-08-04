@@ -15,7 +15,11 @@ public class UserProfileController {
         return ResponseEntity.ok(Collections.emptyList());
     }
 
-    public ResponseEntity<Object> createProfile() {
+    public ResponseEntity<Object> createProfile(UserProfile profile) {
+        if (profile.getUsername() == null) {
+            return ResponseEntity.badRequest().build();
+        }
+
         return ResponseEntity.ok().build();
     }
 }

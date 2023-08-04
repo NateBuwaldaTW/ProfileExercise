@@ -1,5 +1,6 @@
 package com.thoughtworks.profileexercise.controller;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -44,9 +45,21 @@ public class UserProfileControllerTest {
 
     @Test
     void shouldCreateAUserProfile() {
+        var expectedProfile = new UserProfile();
+        expectedProfile.setUsername(RandomStringUtils.random(10));
         var expected = ResponseEntity.ok().build();
 
-        var actual = controller.createProfile();
+        var actual = controller.createProfile(expectedProfile);
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    void shouldNotCreateAUserProfileIfUsernameIsMissing() {
+        var expectedProfile = new UserProfile();
+        var expected = ResponseEntity.badRequest().build();
+
+        var actual = controller.createProfile(expectedProfile);
 
         Assertions.assertEquals(expected, actual);
     }
