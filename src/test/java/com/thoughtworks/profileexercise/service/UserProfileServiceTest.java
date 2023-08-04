@@ -50,7 +50,7 @@ public class UserProfileServiceTest {
 
         private final List<UserProfile> results = new ArrayList<>();
 
-        public List<UserProfile> fetchResults() {
+        protected List<UserProfile> fetchResults() {
             return results;
         }
 
