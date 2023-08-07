@@ -1,4 +1,4 @@
-Instructions for the Profile Exercise
+### Instructions for the Profile Exercise
 
 1. Create a new Github repository called 'ProfileExercise'
 2. Create a new Spring Boot project.  This project can use either Gradle or Maven as a build tool.
